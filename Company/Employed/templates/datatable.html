@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'table.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css
+    ">
+    <title>Empleados</title>
+</head>
+
+<body>
+    <div class="title">
+        <h1>Tabla de Empleados </h1>
+        &nbsp;&nbsp;&nbsp;
+        <a href="{% url 'home' %}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
+                class="bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                <path fill-rule="evenodd"
+                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+            </svg>
+        </a>
+    </div>
+    <div class="center-table">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col" hidden>ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Género</th>
+                    <th scope="col">Edad</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Salario</th>
+                    <th scope="col">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    {% for empleado in empleados %}
+                    <th scope="row" hidden>{{ empleado.id }}</th>
+                    <td>{{ empleado.nombre_empleado }}</td>
+                    <td>{{ empleado.apellido_empleado }}</td>
+                    <td>{{ empleado.genero_empleado }}</td>
+                    <td>{{ empleado.edad_empleado }}</td>
+                    <td>{{ empleado.email_empleado }}</td>
+                    <td>{{ empleado.salario_empleado }}</td>
+                    <td>
+                        <a href="{% url 'delete_empleado' empleado.id %}" style="text-decoration: none;"
+                            onclick="return confirm('¿Estás seguro de que deseas eliminar este empleado?');">
+                            <svg class="borrar" xmlns="http://www.w3.org/2000/svg" width="20" fill="red"
+                                class="bi bi-person-dash-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M11 7.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5" />
+                                <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                            </svg>
+                        </a>
+
+                        &nbsp;&nbsp;&nbsp;
+
+                        <a href="{% url 'edit_empleado' empleado.id %}" style="text-decoration: none;">
+                            <svg class="editar" xmlns="http://www.w3.org/2000/svg" width="20" fill="blue"
+                                class="bi bi-person-fill-gear" viewBox="0 0 16 16">
+                                <path
+                                    d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-9 8c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4m9.886-3.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382zM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0" />
+                            </svg>
+                        </a>
+
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

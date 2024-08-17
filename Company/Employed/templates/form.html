@@ -5,39 +5,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-    <title>Formulario</title>
+    <link rel="stylesheet" href="{% static 'form.css' %}">
+    <title>Editar Empleado</title>
 </head>
 
 <body>
     <div class="center-form">
         <div class="form-container">
             <p class="title">Registro de Usuario</p>
-            <form class="form" method="post" action="/send/">
+            <form class="form" method="post" action="{% url 'edit_empleado' empleado.id %}">
                 {% csrf_token %}
                 <div class="input-divider">
-                    <input type="text" class="input-n" name="nombre_empleado" placeholder="Nombre">
-
-                    <input type="text" class="input-l" name="apellido_empleado" placeholder="Apellido">
+                    <input type="text" class="input-n" name="nombre_empleado" value="{{ empleado.nombre_empleado }}" placeholder="Nombre">
+                    <input type="text" class="input-l" name="apellido_empleado" value="{{ empleado.apellido_empleado }}" placeholder="Apellido">
                 </div>
 
                 <div class="input-divider">
-                    <input type="number" class="input-n" name="edad_empleado" placeholder="Edad">
+                    <input type="number" class="input-n" name="edad_empleado" value="{{ empleado.edad_empleado }}" placeholder="Edad">
                     &nbsp;&nbsp;
-
-                    <input type="radio" id="masculino" name="genero_empleado" value="Masculino" />
+                    <input type="radio" id="masculino" name="genero_empleado" value="Masculino" {% if empleado.genero_empleado == "Masculino" %}checked{% endif %} />
                     &nbsp;&nbsp;
                     <label for="Masculino" class="male">Masculino</label>
-
-                    <input type="radio" id="femenino" name="genero_empleado" value="Femenino" />
+            
+                    <input type="radio" id="femenino" name="genero_empleado" value="Femenino" {% if empleado.genero_empleado == "Femenino" %}checked{% endif %} />
                     &nbsp;&nbsp;
                     <label for="Femenino" class="female">Femenino</label>
-
                 </div>
 
-                <input type="email" class="input" name="email_empleado" placeholder="Correo Electronico">
-                <input type="number" class="input" name="salario_empleado" placeholder="Salario">
-                <button class="form-btn">Agregar</button>
+                <input type="email" class="input" name="email_empleado" value="{{ empleado.email_empleado }}" placeholder="Correo Electronico">
+                <input type="number" class="input" name="salario_empleado" value="{{ empleado.salario_empleado }}" placeholder="Salario">
+                <button class="form-btn">Guardar Cambios</button>
             </form>
 
             <a class="link_emp" style="text-decoration: none;" href="{% url 'datatable' %}">

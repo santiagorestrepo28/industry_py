@@ -21,5 +21,8 @@ from Employed import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),  # Página de inicio
+    path('Empleados/', views.table, name='datatable'),  # Página del Datatable
+    path('edit/<int:id>/', views.edit_empleado, name='edit_empleado'),  # Ruta para editar
+    path('delete/<int:id>/', views.delete_empleado, name='delete_empleado'),  # Ruta para eliminar
     path('send/', views.create_employed, name='create_employed'),  
 ]
